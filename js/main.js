@@ -1,6 +1,7 @@
 //declare functions/variables here that are global
 
-
+let posX = 0;
+let posY = 0;
 //helper function to pre-load assets (load sound here)
 function preload() {
 }
@@ -15,17 +16,31 @@ function setup() {
 // runs continuous at 60fps
 function draw() {
     background(0) // set the background color of canvas
-
-    fill(255,0,0);
-    // (mouseX) = the value I want to map, 
-    // (0) = minimum value it can go
-    // (width) = the maximum value it can go
-    // (0, 500) = the new values it will be mapped to
-    const mapX = map(mouseX, 0, width, 0, 500);
-    const mapY = map(mouseY, 0, width, 0, 500);
-
     translate(width/2, height / 2);
 
+    fill('red');
+    rect(posX,posY,500,500);
+}
 
-    rect(0, 0,mapX,mapY);
+function keyPressed() {
+    switch(keyCode) {
+        case LEFT_ARROW:
+            posX -=10;
+            break;
+
+        case RIGHT_ARROW:
+            posX += 10;
+            break;
+
+        case UP_ARROW:
+            posY -= 10;
+            break;
+        
+        case DOWN_ARROW:
+            posY += 10;
+            break;
+        
+        default:
+            break;
+    }
 }

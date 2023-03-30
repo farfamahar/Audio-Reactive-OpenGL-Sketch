@@ -1,5 +1,7 @@
 //declare functions/variables here that are global
 let audio, amp, fft;
+const bins = 1024;
+let binWidth;
 
 let posX = 0;
 let posY = 0;
@@ -10,35 +12,31 @@ function preload() {
 
 //waits for what's in preload before executing (runs only once)
 function setup() {
-    createCanvas(windowWidth,windowHeight);
-    rectMode(CENTER);
-    amp = new p5.Amplitude();
-    audio.play();
-    fft = new p5.FFT();
+    const canvas = createCanvas(windowWidth,windowHeight);
+    canvas.mouseClicked(togglePlay);
+    fft = new p5.FFT(0, bins);
+    binWidth = width / bins;
 
 }
 // runs continuous at 60fps
 function draw() {
-    background(0) // set the background color of canvas
-    stroke(255);
-    // translate(0, height / 2);
-    const volume = amp.getLevel();
-    // const mapW = map(volume, 0, 0.1, 0, 500);
-    // rect(0,0,mapW,mapW);
+    background(0)
+    noStroke();
 
-    // const waveform = audio.getPeaks();
+    const spectrum = fft.analyze() //gives frequency spectrum
 
-    // for(let i = 0; i < waveform.length; i++){
-    //     line(i, waveform[i] * 100, i, waveform[i] * -10)
-    // }
-
-    const waveform = fft.waveform();
-
-    for(let i = 0; i < waveform.length; i++){
-        const x = map(i, 0, waveform.length, 0, width);
-        const y = map(waveform[i], -1, 1, 0, height);
-        point(x, y);
+    for(let i = 0; i < spectrum.length; i++){
+        const y = map(spectrum[i], 0, 255, height, 0)
+        rect(i * binWidth, y, binWidth, height - y);
     }
 
+}
 
+
+function togglePlay() {
+    if(audio.isPlaying()){
+        audio.pause()
+    } else {
+        audio.loop()
+    }
 }

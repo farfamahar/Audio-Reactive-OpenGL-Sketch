@@ -6,9 +6,6 @@ let posY = 0;
 function preload() {
     myShaders = loadShader('shaders/vertex_noise.vert', 'shaders/fragment.frag');
     audio = loadSound('audio/01.mp3')
-
-
-
 }
 
 function setup() {
@@ -16,7 +13,6 @@ function setup() {
     shader(myShaders);
     // rectMode(CENTER);
     amp = new p5.Amplitude();
-    audio.play();
     fft = new p5.FFT();
           // Using the DOM library of p5.
 	button = createButton('Play / Pause')
@@ -32,8 +28,8 @@ function draw(){
     const volume = amp.getLevel(); // 0 - 1
     freq *= 0.001;
 
-    const mapF = map(freq, 0, 1, 0, 20);
-    const mapA = map(volume, 0, 0.2, 0, 0.5);
+    const mapF = map(freq, 0, 1, 0, 20); // experiment with values
+    const mapA = map(volume, 0, 0.2, 0, 0.5); //experiment with values
 
 
 
@@ -44,13 +40,14 @@ function draw(){
     sphere(width/8, 200, 200);
 
     stroke(255);
+    strokeWeight(0.3);
     const waveform = fft.waveform();
 
     beginShape();
     for(let i = 0; i < waveform.length; i++){
         const x = map(i, 0, waveform.length, -width/2, width/2);
         const y = map(waveform[i], -1, 1, -height/2, height/2);
-        vertex(x, y);
+        point(x, y);
     }
     endShape();
 }

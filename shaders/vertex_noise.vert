@@ -10,6 +10,7 @@ uniform float uFrequency;
 uniform float uAmp;
 
 varying vec3 vNormal;
+varying float vNoise;
 
 vec3 mod289(vec3 x)
 {
@@ -176,8 +177,10 @@ float pnoise(vec3 P, vec3 rep)
 }
 
 void main() {
-    float displacement = 0.5 * pnoise(aNormal + (uTime * 0.01), vec3(0.0));
-    vec4 newPosition = vec4(aPosition + displacement * aNormal, 1.0);
+    float displacement = uAmp * pnoise(aNormal + (uTime * 0.01), vec3(0.0)); // experiment with values
+    vec4 newPosition = vec4(aPosition + displacement * aNormal, 1.0); // experiment with values
+
+    vNoise = pnoise(aNormal, vec3(0.0));
 
     vNormal = aNormal;
 

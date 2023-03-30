@@ -4,3 +4,26 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+.play-button {
+  display: block;
+  position: fixed;
+  right: 2%;
+  bottom: 6%;
+  padding: 1vw 5vw;
+  border: 1px solid white;
+  background: black;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.2s ease-out;
+}
+
+.play-button:hover {
+  cursor: pointer;
+  background: white;
+  color: black;
+}
+
+.play-button:focus {
+  outline: none;
+}

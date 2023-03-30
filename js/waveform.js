@@ -17,21 +17,17 @@ function setup() {
     audio.play();
     fft = new p5.FFT();
 
+      // Using the DOM library of p5.
+	button = createButton('Play / Pause')
+	button.mousePressed(toggleSound)
+	button.addClass('play-button')  
+
 }
 // runs continuous at 60fps
 function draw() {
-    background(0) // set the background color of canvas
+    background(0) 
     stroke(255);
-    // translate(0, height / 2);
     const volume = amp.getLevel();
-    // const mapW = map(volume, 0, 0.1, 0, 500);
-    // rect(0,0,mapW,mapW);
-
-    // const waveform = audio.getPeaks();
-
-    // for(let i = 0; i < waveform.length; i++){
-    //     line(i, waveform[i] * 100, i, waveform[i] * -10)
-    // }
 
     const waveform = fft.waveform();
 
@@ -43,3 +39,15 @@ function draw() {
 
 
 }
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight)
+}
+
+function toggleSound() {
+    if (audio.isPlaying()) {
+      audio.pause()
+    } else {
+      audio.play()
+    }
+  }

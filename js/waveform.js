@@ -27,8 +27,6 @@ function setup() {
 function draw() {
     background(0) 
     stroke(255);
-    const volume = amp.getLevel();
-
     const waveform = fft.waveform();
 
     for(let i = 0; i < waveform.length; i++){

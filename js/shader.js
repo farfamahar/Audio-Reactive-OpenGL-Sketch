@@ -11,5 +11,6 @@ function setup() {
 }
 
 function draw(){
-    rect(0, 0, width,height);
+    myShaders.setUniform('uName', frameCount);
+    sphere(width/4, 200, 200);
 }

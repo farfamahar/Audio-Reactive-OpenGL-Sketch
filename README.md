@@ -1,4 +1,4 @@
-# p5.js Audio Reactive Sketch
+# p5.js Audio Reactive OpenGL Sketch
 
 
 

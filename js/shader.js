@@ -13,7 +13,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   shader(myShaders);
-  //   rectMode(CENTER);
   amp = new p5.Amplitude();
   fft = new p5.FFT();
 }
@@ -28,7 +27,7 @@ function loaded() {
 
 function draw() {
   if (loading) {
-    background("black");
+    background('black');
     rotate(angle);
     strokeWeight(4);
     stroke(255);

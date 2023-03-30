@@ -28,11 +28,12 @@ function draw(){
     background(0);
     fft.analyze();
 
-    const freq = fft.getEnergy('bass'); // 0 - 1
-    const volume = amp.getLevel(); // 0 - 255
+    let freq = fft.getCentroid(); 
+    const volume = amp.getLevel(); // 0 - 1
+    freq *= 0.001;
 
-    const mapF = map(freq, 0, 255, 0, 20);
-    const mapA = map(volume, 0, 0.5, 0, 0.5);
+    const mapF = map(freq, 0, 1, 0, 20);
+    const mapA = map(volume, 0, 0.2, 0, 0.5);
 
 
 

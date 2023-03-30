@@ -17,7 +17,7 @@ void main() {
     float amplitude = uAmp;
 
     float displacement = sin(newPosition.z * frequency + uTime * 0.1);
-    newPosition.x += displacement * aNormal.z * amplitude;
+    newPosition.z += displacement * aNormal.z * amplitude;
 
     vNormal = aNormal;
     gl_Position = uProjectionMatrix * uModelViewMatrix * newPosition;

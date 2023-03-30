@@ -26,8 +26,21 @@ function setup() {
 
 function draw(){
     background(0);
+    fft.analyze();
+
+    const freq = fft.getEnergy('bass'); // 0 - 1
+    const volume = amp.getLevel(); // 0 - 255
+
+    const mapF = map(freq, 0, 255, 0, 20);
+    const mapA = map(volume, 0, 0.5, 0, 0.5);
+
+
+
     myShaders.setUniform('uTime', frameCount);
-    sphere(width/4, 200, 200);
+    myShaders.setUniform('uFrequency', mapF);
+    myShaders.setUniform('uAmp', mapA);
+
+    sphere(width/8, 200, 200);
 
     stroke(255);
     const waveform = fft.waveform();

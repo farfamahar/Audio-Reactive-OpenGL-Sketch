@@ -1,7 +1,9 @@
 //declare functions/variables here that are global
 let audio, amp, fft;
-const bins = 1024;
+const bins = 64;
 let binWidth;
+let peakDetect;
+let bgColor = 0;
 
 let posX = 0;
 let posY = 0;
@@ -15,21 +17,22 @@ function setup() {
     const canvas = createCanvas(windowWidth,windowHeight);
     canvas.mouseClicked(togglePlay);
     fft = new p5.FFT(0, bins);
-    binWidth = width / bins;
+    peakDetect = new p5.PeakDetect(400,2600,0.1); // define frequency range you want to work with (trial and error)
+    peakDetect.onPeak(peakDetected);
 
 }
 // runs continuous at 60fps
 function draw() {
-    background(0)
+    background(bgColor)
     noStroke();
 
-    const spectrum = fft.analyze() //gives frequency spectrum
+    fft.analyze(bins);
+    peakDetect.update(fft);
 
-    for(let i = 0; i < spectrum.length; i++){
-        const y = map(spectrum[i], 0, 255, height, 0)
-        rect(i * binWidth, y, binWidth, height - y);
-    }
+}
 
+function peakDetected(){
+    bgColor = color(random(255),random(255),random(255))
 }
 
 

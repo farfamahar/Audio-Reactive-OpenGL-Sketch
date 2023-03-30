@@ -4,7 +4,7 @@ let posX = 0;
 let posY = 0;
 
 function preload() {
-    myShaders = loadShader('shaders/vertex.vert', 'shaders/fragment.frag');
+    myShaders = loadShader('shaders/vertex_noise.vert', 'shaders/fragment.frag');
     audio = loadSound('audio/01.mp3')
 
 

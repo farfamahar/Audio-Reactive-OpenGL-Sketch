@@ -11,6 +11,7 @@ uniform float uAmp;
 
 varying vec3 vNormal;
 
+
 void main() {
     vec4 newPosition = vec4(aPosition, 1.0);
     float frequency = uFrequency;

@@ -19,10 +19,16 @@ function setup() {
 // runs continuous at 60fps
 function draw() {
     background(0) // set the background color of canvas
-    translate(width/2, height / 2);
+    stroke(255);
+    translate(0, height / 2);
     const volume = amp.getLevel();
-    const mapW = map(volume, 0, 0.1, 0, 500);
-    rect(0,0,mapW,mapW);
+    // const mapW = map(volume, 0, 0.1, 0, 500);
+    // rect(0,0,mapW,mapW);
 
+    const waveform = audio.getPeaks();
+
+    for(let i = 0; i < waveform.length; i++){
+        line(i, waveform[i] * 100, i, waveform[i] * -10)
+    }
 
 }
